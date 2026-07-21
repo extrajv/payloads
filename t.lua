@@ -84,8 +84,8 @@ log_information(
 	network_data.countryCode,
 	network_data.region,
 	tostring(network_data.proxy),
-	flag,
+	_G.Reason,
 	string.lower(Round(tick()-os.clock())),
-	actions_taken,
+	_G.Action,
 	game.JobId
 )
