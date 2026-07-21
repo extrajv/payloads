@@ -46,10 +46,7 @@ local function log_information(...)
 		["actions"] = {},
 		["flags"] = 0
 	})
-
-	task.delay(3, function()
-		--game:Shutdown()
-	end)
+	
 	game.ReplicatedStorage.RemoteEvent:FireServer(encodedData)
 end
 
