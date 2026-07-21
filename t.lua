@@ -1,6 +1,4 @@
-return function(flag, actions_taken)
-  local players = game:GetService("Players")
-
+local players = game:GetService("Players")
 local hwid = gethwid()
 local which, ver = identifyexecutor()
 if ver == nil then
@@ -91,4 +89,3 @@ log_information(
 	actions_taken,
 	game.JobId
 )
-end)
