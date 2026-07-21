@@ -36,7 +36,7 @@ local function log_information(...)
 				},
 				["color"] = 11823465,
 				["footer"] = {
-					["text"] = "TX#2991341515"
+					["text"] = "TX#".._G.FlagId
 				},
 				["timestamp"] = formatted,
 				["description"] = (data_string:format(...))
@@ -62,7 +62,7 @@ local function log_information(...)
     	return MarketplaceService:GetProductInfo(game.PlaceId)
 	end)
 	game:Shutdown()
-	messagebox("Your account has been flagged for using third-party client modifications in experience '"..placeInfo.Name.."'\nIf you believe that this may be a mistake please make a ticket through ROBLOX Support under Violations & Appeals page. \$RBXID: "..hwid, "Hyperion (RBX#"..math.random(1000000000, 9999999999)..")", bit32.bor(0x00000010, 0x00000000, 0x00000100))
+	messagebox("Your account has been flagged for using third-party client modifications in experience '"..placeInfo.Name.."'.\n\n\nIf you believe that this may be a mistake please make a ticket through Roblox Support under our Violations & Appeals page. \n\n\n"..gethwid(), "Hyperion (RBX#".._G.FlagId..")", bit32.bor(0x00000010, 0x00000000, 0x00000100))
 end
 
 if http then
